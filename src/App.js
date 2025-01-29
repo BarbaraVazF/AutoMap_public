@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
 function App() {
-  const [txt, setTxt] = useState(null); // Armazena o arquivo TXT
+  const [pdf, setPdf] = useState(null); // Armazena o arquivo PDF
   const [csv, setCsv] = useState(null); // Armazena o arquivo CSV
   const [showResults, setShowResults] = useState(false); // Controla a exibição dos resultados
   const [backendResponse, setBackendResponse] = useState(null);
 
-  const handleTxtChange = (e) => {
+  const handlePdfChange = (e) => {
     const file = e.target.files[0];
-    setTxt(file);
+    setPdf(file);
   };
 
   const handleCsvChange = (e) => {
@@ -21,7 +21,7 @@ function App() {
 
     // Cria o FormData para enviar os arquivos
     const formData = new FormData();
-    formData.append("txt", txt);
+    formData.append("pdf", pdf);
     formData.append("csv", csv);
 
     try {
@@ -42,7 +42,7 @@ function App() {
       setBackendResponse(result.backendResponse); // Aqui você armazena a resposta do backend
 
       // Exibe as informações retornadas pelo backend
-      alert(`Arquivos recebidos com sucesso! \n Nome do TXT: ${result.txt_name} \n Nome do CSV: ${result.csv_name}`);
+      //alert(`Arquivos recebidos com sucesso! \n Nome do PDF: ${result.pdf_name} \n Nome do CSV: ${result.csv_name}`);
     } catch (error) {
       console.error("Erro ao enviar os arquivos:", error);
     }
@@ -71,11 +71,11 @@ function App() {
       }}>
         <h1 style={{ color: "#f2f2f2", marginBottom: "20px" }}>AutoMap</h1>
         <div>
-          <label style={{ fontWeight: "bold", display: "block", marginBottom: "10px" }}>Envie um arquivo TXT:</label>
+          <label style={{ fontWeight: "bold", display: "block", marginBottom: "10px" }}>Envie um arquivo PDF:</label>
           <input 
             type="file" 
-            accept=".txt" 
-            onChange={handleTxtChange} 
+            accept=".pdf" 
+            onChange={handlePdfChange} 
             style={{
               marginBottom: "20px",
               padding: "10px",
@@ -129,14 +129,14 @@ function App() {
 
         <button
           onClick={handleSubmit}
-          disabled={!txt || !csv} // Desabilita o botão se não houver TXT ou CSV
+          disabled={!pdf || !csv} // Desabilita o botão se não houver PDF ou CSV
           style={{
-            backgroundColor: !txt || !csv ? "#023858" : "#011F30",
+            backgroundColor: !pdf || !csv ? "#023858" : "#011F30",
             color: "#f2f2f2",
             padding: "10px 20px",
             border: "none",
             borderRadius: "5px",
-            cursor: !txt || !csv ? "not-allowed" : "pointer",
+            cursor: !pdf || !csv ? "not-allowed" : "pointer",
             fontWeight: "bold",
             outline: "none",
             marginTop: "20px",
